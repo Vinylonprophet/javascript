@@ -1,0 +1,55 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-12 21:03:04
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-12 21:17:54
+ * @FilePath: \oop\使用类注意事项.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用类注意事项</title>
+</head>
+<body>
+    <button>
+        点击
+    </button>
+    <script>
+        var that;
+        var _that;
+        class Star{
+            // construct的this指向实例对象
+            constructor(uname, age){
+                that = this;
+                this.uname = uname;
+                this.age = age;
+                // this.sing();
+                this.btn = document.querySelector('button');
+                this.btn.onclick = this.sing;
+                console.log(this);
+            }
+            // 
+            sing(){
+                console.log(this);
+                console.log(that.uname);
+            }
+            dance(){
+                _that = this;
+                console.log(this);
+            }
+        }
+        var ldh = new Star('刘德华');
+        console.log(that === ldh);
+        ldh.dance();
+        console.log(_that === ldh);
+        // ldh.sing();
+
+        // 1. 在 ES6 中类没有变量提升, 所以必须先定义类, 才能通过类实例化对象
+        // 2. 类里面的共有属性和方法一定要加this使用
+    </script>
+</body>
+</html>

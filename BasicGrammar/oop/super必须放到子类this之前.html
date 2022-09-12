@@ -1,0 +1,46 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-12 20:52:39
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-12 20:58:26
+ * @FilePath: \oop\super必须放到子类this之前.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>super必须放到子类this之前</title>
+    <script>
+        class Father{
+            constructor(x, y){
+                this.x = x;
+                this.y = y;
+            }
+            sum(){
+                console.log(this.x + this.y);
+            }
+        }
+        class Son extends Father{
+            constructor(x, y){
+                // super必须在子类this调用之前调用
+                super(x, y);
+                this.x = x;
+                this.y = y;
+            }
+            subtract() {
+                console.log(this.x - this.y);
+            }
+        }
+
+        var son = new Son(5,3);
+        son.subtract();
+        son.sum();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
