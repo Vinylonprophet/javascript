@@ -1,0 +1,47 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-14 23:57:55
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-15 23:47:55
+ * @FilePath: \javascript\BasicGrammar\oop\构造函数创建对象.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>构造函数创建对象以及实例和静态成员</title>
+</head>
+<body>
+    <script>
+        // 1. 利用 new Object() 创建对象
+
+        var obj1 = new Object();
+
+        // 2. 利用 对象字面量创建对象
+
+        var obj2 = {}
+
+        // 3. 利用构造函数创建对象
+        function Star(uname, age){
+            // 以下的通过构造函数内部this添加的成员比如: uname, age, sing 就是实例成员
+            this.uname =uname;
+            this.age =age;
+            this.sing = function(){
+                console.log("会唱歌");
+            }
+        }
+
+        // 静态成员: 在构造函数本身上添加的成员
+        Star.sex = '男';
+
+        var ldh = new Star("刘德华", 18);
+        console.log(ldh);
+        // 静态成员只能通过构造函数来访问
+        console.log(Star.sex);
+        ldh.sing();
+    </script>
+</body>
+</html>
