@@ -1,0 +1,37 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-16 00:05:50
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-16 00:22:17
+ * @FilePath: \javascript\BasicGrammar\oop\对象原型__proto__.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象原型__proto__</title>
+</head>
+<body>
+    <script>
+        // 对象都会有一个属性 __proto__ 指向构造函数的prototype原型对象,之所以对象可以使用构造函数prototype原型对象的属性和方法,就是因为对象有__proto__原型的存在
+        function Star(uname, age){
+            this.uname = uname;
+            this.age = age;
+        }
+        Star.prototype.sing = function(){
+            console.log('Sing a song')
+        }
+        var ldh = new Star('ldh', 18);
+        var zxy = new Star('zxy', 19);
+        console.log(ldh);   // 对象身上自动添加 __proto__ 指向构造函数的原型对象
+        // __proto__对象原型和prototype原型对象是等价的
+        console.log(ldh.__proto__);
+        console.log(Star.prototype);
+        console.log(ldh.__proto__ === Star.prototype);
+        // 方法的查找规则,先查ldh对象是否有sing方法,有执行,没有就到通过__proto__找prototype的sing
+    </script>
+</body>
+</html>

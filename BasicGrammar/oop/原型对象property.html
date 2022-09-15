@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原型对象property</title>
+</head>
+<body>
+    <script>
+        // 构造函数很好用, 但是会存在浪费内存的问题, 比如new一个对象, 就会多一个内存空间, 来存放一个function函数
+        function Star(uname, age){
+            this.uname = uname;
+            this.age = age;
+            // this.sing = function(){
+            //     console.log("Sing a song");
+            // }
+        }
+
+        // 添加原型对象
+        Star.prototype.sing = function(){
+            console.log("Sing a song");
+        }
+
+        var ldh = new Star('ldh', 18);
+        var zxy = new Star('zxy', 19);
+
+        ldh.sing();
+        zxy.sing();
+
+        // 判断地址是否相同
+        console.log(ldh.sing === zxy.sing);
+
+        // 构造函数通过原型分配的函数是所有对象所共享的
+        // 每一个构造函数就有一个prototype属性，指向另一个对象。这个prototype就是一个对象，这个对象的所有属性和方法都会被构造函数拥有。
+        // 我们可以把不变的方法定义在原型（prototype）对象上，这样所有的实例都可以共享。
+        // 一般情况下，公共属性定义到构造函数里，公共方法放到原型对象上
+        // 原型是一个对象,就不必开辟function空间了
+
+    </script>
+</body>
+</html>
