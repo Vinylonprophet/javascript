@@ -1,0 +1,44 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-19 11:36:32
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-19 11:44:36
+ * @FilePath: \javascript\BasicGrammar\oop\call方法的作用.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call方法的作用</title>
+</head>
+<body>
+    <script>
+        // ES6之前是通过 构造函数 + 原型对象模拟实现继承, 被称为组合继承
+        // call 有两个作用, 一个是调用这个函数, 一个是修改函数运行时this的指向
+        // fun.call(thisArg, arg1, agr2, ...)
+        // thisArg: 当前调用函数this的指向对象
+        // arg1, agr2: 传递的其他参数
+
+        function fn(x, y){
+            console.log('喝咖啡');
+            console.log(this);
+            this.x = x;
+            this.y = y;
+            console.log(x + '---' + y);
+        }
+        fn();
+
+        // 1. call调用函数
+        fn.call();
+
+        // 2. call改变this指向
+        var o = {
+            name: 'andy'
+        };
+        fn.call(o, 5, 12);
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-19 11:06:18
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-19 11:17:21
+ * @FilePath: \javascript\BasicGrammar\oop\对象成员查找规则.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象成员查找规则</title>
+</head>
+<body>
+    <script>
+        // 当访问一个对象属性(包括方法)时, 先找对象自身有没有该属性
+        // 没有的话就找原型, 指的是__proto__指向prototype的原型对象
+        // 如果还没有的话就查找原型对象的原型(Object的原型对象)
+        // 以此类推一直到NULL
+        function Star(uname, age){
+            this.uname = uname;
+            this.age = age;
+        }
+        Star.prototype.sing = function(){
+            console.log('会唱歌');
+        }
+        // Object.prototype.sex = '男';
+        var ldh = new Star('刘德华', 18);
+        console.log(ldh.sex);
+        console.log(ldh);
+        console.log(Star);
+        console.log(Object.prototype);
+        console.log(Object.prototype.toString);
+    </script>
+</body>
+</html>

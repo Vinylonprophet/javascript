@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this</title>
+</head>
+<body>
+    <script>
+        function Star(uname, age){
+            this.uname = uname;
+            this.age = age;
+        }
+        // 创建一个that
+        var that;
+        Star.prototype.sing = function(){
+            console.log('会唱歌');
+            // that = this
+            that = this;
+        }
+        var ldh = new Star('刘德华', 18);
+        // 1.在构造函数中, 里面的this指向的是构造实例
+        // new了构造函数会创建一个空对象, this指向空对象, 也就是指向构造实例, 上述例子也就是指向ldh的构造实例
+
+        console.log(that === ldh);
+        ldh.sing();
+        console.log(that === ldh);
+
+        // 2.原型对象函数里的this指向的是实例对象
+    </script>
+</body>
+</html>
