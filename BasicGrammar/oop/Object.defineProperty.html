@@ -1,0 +1,67 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-20 15:11:50
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-20 15:45:30
+ * @FilePath: \javascript\BasicGrammar\oop\Object.defineProperty.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.defineProperty</title>
+</head>
+<body>
+    <script>
+        // Object.defineProperty() 定义新属性或修改原有的属性
+        var obj = {
+            id: 1,
+            pname: '小米',
+            price: 1999
+        }
+        // obj.num = 10;
+        obj.price = 1699;
+        console.log(obj);
+        // Object.defineProperty(obj, prop, descriptor)
+        // obj: 目标对象
+        // prop: 必需, 需定义或修改的属性的名字
+        // descriptor: 目标所拥有的特性
+        // 第三个属性 descriptor 说明: 以{}的形式书写
+        // value: 设置属性的值, 默认undefined
+        // writable: 是否可以重写, true | false, 默认false
+        // enumerable: 目标是否可以被枚举, true | false, 默认false
+        // configuarble: 目标是否可以被删除或是否可以被再次修改特性, true | false, 默认false
+        Object.defineProperty(obj, 'price', {
+            value: 1000
+        })
+        Object.defineProperty(obj, 'id', {
+            writable: false
+        })
+        // 不允许被修改
+        obj.id = 5;
+        console.log('new', obj);
+        Object.defineProperty(obj, 'address', {
+            value: 'ShangHai',
+            writable: false,
+            enumerable: false,
+            configurable: false
+        })
+        // 无法遍历
+        console.log(Object.keys(obj));
+        console.log('new', obj);
+        delete obj.address;
+        delete obj.price;
+        console.log('new', obj);
+        Object.defineProperty(obj, 'address', {
+            value: 'HangZhou',
+            writable: true,
+            enumerable: true,
+            configurable: true
+        })
+        console.log('new', obj);
+    </script>
+</body>
+</html>

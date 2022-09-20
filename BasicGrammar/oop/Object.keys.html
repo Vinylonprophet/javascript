@@ -1,0 +1,35 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-20 15:34:32
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-20 15:39:21
+ * @FilePath: \javascript\BasicGrammar\oop\Object.keys.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.keys</title>
+</head>
+<body>
+    <script>
+        // 用于获取自生对象的所有属性
+        var obj = {
+            id: 1,
+            pname: '小米',
+            price: 1999,
+            num: 10
+        }
+        // 效果类似于 for ... in
+        // 返回一个由属性名组成的数组
+        var arr = Object.keys(obj);
+        console.log(arr);
+        arr.forEach(function(value){
+            console.log(value);
+        })
+    </script>
+</body>
+</html>
