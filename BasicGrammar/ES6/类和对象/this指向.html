@@ -16,10 +16,10 @@
         var that;
         Star.prototype.sing = function(){
             console.log('会唱歌');
-            // that = this
             that = this;
         }
         var ldh = new Star('刘德华', 18);
+        console.log(ldh);
         // 1.在构造函数中, 里面的this指向的是构造实例
         // new了构造函数会创建一个空对象, this指向空对象, 也就是指向构造实例, 上述例子也就是指向ldh的构造实例
 
