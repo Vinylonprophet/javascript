@@ -1,3 +1,11 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-17 15:41:56
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-21 15:52:58
+ * @FilePath: \javascript\ES6\构造函数和原型\原型链.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +25,8 @@
         }
         var ldh = new Star('刘德华', 18);
         console.log(Star.prototype);    // Star的原型对象存在一个__proto__指向的是Object的原型对象
+        console.log(Star.prototype.__proto__);
+        console.log(Object.prototype.constructor === Star.prototype.__proto__.constructor);
         console.log(Star.prototype.__proto__ === Object.prototype);
         // Object的原型对象是由Object的constructor创建出来的，而constructor肯定也能创造出Object的prototyoe
         // Object的原型对象的__proto__指向为null（空）

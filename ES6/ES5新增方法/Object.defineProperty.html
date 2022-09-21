@@ -2,7 +2,7 @@
  * @Author: Vinylonprophet 915390118@qq.com
  * @Date: 2022-09-20 15:11:50
  * @LastEditors: Vinylonprophet 915390118@qq.com
- * @LastEditTime: 2022-09-20 15:45:30
+ * @LastEditTime: 2022-09-21 19:03:46
  * @FilePath: \javascript\BasicGrammar\oop\Object.defineProperty.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -52,8 +52,8 @@
         // 无法遍历
         console.log(Object.keys(obj));
         console.log('new', obj);
-        delete obj.address;
-        delete obj.price;
+        // delete obj.address;
+        // delete obj.price;
         console.log('new', obj);
         Object.defineProperty(obj, 'address', {
             value: 'HangZhou',

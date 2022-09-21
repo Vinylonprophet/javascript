@@ -2,7 +2,7 @@
  * @Author: Vinylonprophet 915390118@qq.com
  * @Date: 2022-09-16 00:23:49
  * @LastEditors: Vinylonprophet 915390118@qq.com
- * @LastEditTime: 2022-09-17 15:38:32
+ * @LastEditTime: 2022-09-21 14:55:56
  * @FilePath: \javascript\BasicGrammar\oop\原型constructor构造函数.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -22,12 +22,12 @@
             this.uname = uname;
             this.age = age;
         }
-        // Star.prototype.sing = function(){
-        //     console.log('我会唱歌');
-        // }
-        // Star.prototype.movie = function(){
-        //     console.log('我会演电影');
-        // }
+        Star.prototype.sing = function(){
+            console.log('我会唱歌');
+        }
+        Star.prototype.movie = function(){
+            console.log('我会演电影');
+        }
         // Star的prototype被覆盖掉了，就没有constructor属性了
         // 以对象的形式需要自己添加constructor
         Star.prototype = {
@@ -41,6 +41,9 @@
         }
         var ldh = new Star('刘德华', 18);
         var zxy = new Star('张学友', 19);
+        console.log(ldh);
+        console.log(Star.prototype)
+        console.log(Star);
         // 下面三者等价
         console.log(Star);
         console.log(ldh.__proto__);
