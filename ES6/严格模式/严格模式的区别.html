@@ -1,0 +1,68 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-22 17:56:26
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-22 18:14:26
+ * @FilePath: \javascript\ES6\严格模式\严格模式的区别.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>严格模式的区别</title>
+</head>
+<body>
+    <script>
+        'use strict'
+
+        // 现在指向undefined
+        // function fn(){
+        //     console.log(this);
+        // }
+        // fn();
+
+        // 以前如果因为this指向window，所以就会不new就会存在window.sex
+        // 现在不加new会报错，因为是undefined
+        // 加了new就指向创建的实例
+        // function Star(){
+        //     this.sex = 'male';
+        // }
+        // Star();
+
+        // 严格模式下的定时器中的this指向的还是window
+        // setTimeout(function(){
+        //     console.log(this);
+        // }, 300)
+
+        // 普通模式下两个参数可以同名
+        // 严格模式下两个参数不能同名
+        // function fn(a, a){
+        //     console.log(a+a);
+        // }
+
+        // fn(1,2);
+
+        // 语法错误
+        if(true){
+            function fn(){ };
+            fn();
+        }
+
+        // 语法错误
+        for(var i = 0; i < 5; i++){
+            function fn2() {
+                
+            }
+            fn2();
+        }
+
+        // 合法
+        function fn3(){
+            function fn4(){ }
+        }
+    </script>
+</body>
+</html>

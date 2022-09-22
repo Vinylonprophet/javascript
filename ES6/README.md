@@ -311,7 +311,7 @@ Star.prototype.sing = function(){
 }
 ```
 
-注意：
+注意事项：
 
 1.  这个`prototype`就是一个对象，这个对象的所有属性和方法都会被构造函数所拥有
 2.  一般情况下，我们的公共属性定义到构造函数里面，公共方法放在原型对象上
@@ -438,7 +438,7 @@ var arr = [1,2,3];
 console.log(arr.sum());
 ```
 
-注意：不能以对象的形式覆盖掉
+注意事项：不能以对象的形式覆盖掉
 
 
 
@@ -585,7 +585,7 @@ filter()方法`创建一个新数组`，满足条件的元素返回，用于`筛
 
 some()方法用于检测数组中的元素是否满足指定条件，返回`布尔值`
 
-注意：如果找到`第一个满足条件的元素`，就返回true，否则返回false
+注意事项：如果找到`第一个满足条件的元素`，就返回true，否则返回false
 
 ```javascript
 var arr = ['red', 'pink', 'green', 'yellow'];
@@ -780,5 +780,500 @@ delete obj.pname;
 
 // 删除address就会报错
 delete obj.address;
+```
+
+
+
+### 5. 函数进阶
+
+#### 函数的定义和调用
+
+**定义方式**
+
+1. 函数声明`function`关键字（命名函数）
+2. 函数表达式（匿名函数）
+3. new Function('参数1','参数2','函数体')
+
+```javascript
+// 1. 自定义函数（命名函数）
+function fn(){
+
+};
+
+// 2. 函数表达式（匿名函数）
+var fun = function(){
+
+}
+
+// 3. new Function('参数1','参数2','函数体')
+var f = new Function('a','b','console.log(a+b)')
+f(1,5);
+
+// 4. 所有函数都属于Function的实例（对象）
+console.log(fn instanceof Object);
+console.log(fun instanceof Object);
+console.log(f instanceof Object);
+```
+
+注意事项：
+
+1. Function里面参数必须是字符串格式
+2. 第三种方式执行效率低，也不方便书写，使用较少
+3. 所有函数都是Function的实例（对象）
+4. 函数也属于对象
+
+
+
+**调用方式**
+
+1. 普通函数
+2. 对象的方法
+3. 构造函数
+4. 绑定事件函数
+5. 定时器函数
+6. 立即执行函数
+
+```javascript
+// 1.普通函数
+function fn(){
+	console.log('调用普通函数');
+}
+fn();
+fn.call();
+
+// 2.对象的方法
+var o = {
+    sayHi: function(){
+        console.log('调用对象的方法');
+    }
+}
+o.sayHi();
+
+// 3.构造函数
+function Star(){
+
+}
+// 通过new创建实例对象
+new Star();
+
+// 4.绑定事件函数
+btn.onclick = function(){
+
+}
+
+// 5.定时器函数
+setInterval(function(){
+
+}, 1000);
+
+// 6.立即执行函数，是自动调用的
+(function(){
+	console.log('立即执行函数');
+})()
+```
+
+
+
+#### this指向
+
+**普通函数**
+
+```javascript
+// 普通函数 指向window
+function fn(){
+	console.log('调用普通函数' + this);
+}
+window.fn();
+```
+
+
+
+**对象的方法**
+
+```javascript
+// 对象的方法
+var o = {
+    sayHi: function(){
+    	console.log('调用对象的方法'+ this);
+    }
+}
+o.sayHi();
+```
+
+
+
+**构造函数**
+
+```javascript
+// 构造函数 原型对象里的this也指向实例对象
+function Star(uname){
+
+}
+
+Star.prototype.sing = function(){
+	console.log('sing');
+}
+
+// 通过new创建实例对象
+var ldh = new Star();
+```
+
+
+
+**绑定函数事件**
+
+```javascript
+// 绑定事件函数 指向的btn这个调用者
+btn.onclick = function(){
+
+}
+```
+
+
+
+**定时器函数**
+
+```javascript
+// 定时器函数 指向window
+window.setInterval(function(){
+	console.log('调用定时器函数' + this);
+}, 1000);
+```
+
+
+
+**立即执行函数**
+
+```javascript
+// 立即执行函数 指向的是window
+(function(){
+	console.log('立即执行函数' + this);
+})()
+```
+
+
+
+#### 改变this指向
+
+**call()方法**
+
+1. 第一个作用可以调用函数，改变函数内部的this指向
+2. 第二个作用是通过改变this指向，实现`继承`
+
+```javascript
+// 第一个作用
+var o = {
+	name: 'Andy'
+}
+
+function fn(a,b){
+    console.log(this);
+    console.log(a + b);
+}
+
+fn.call();
+fn.call(o, 1, 2);
+
+// 第二个作用
+function Father(uname, age, sex){
+    this.uname = uname;
+    this.age = age;
+    this.sex = sex;
+}
+
+function Son(uname, age, sex){
+	Father.call(this, uname, age, sex);
+}
+
+var son = new Son('Vinylon', 18, 'male');
+
+console.log(son);
+```
+
+
+
+**apply()方法**
+
+1. 调用函数，可以改变函数内部的this指向
+2. 参数必须是`数组`（伪数组）
+
+```javascript
+// 使用方法
+fun.apply(thisArg,[argsArray])
+
+var o = {
+    name: 'Andy'
+}
+
+function fn(arr){
+    console.log(this);
+    console.log(arr);
+}
+
+fn.apply(o, ['green']);
+```
+
+应用：借助数学内置对象求最大值
+
+```javascript
+Math.max.apply(Math, arr);
+Math.min.apply(Math,arr);
+```
+
+
+
+**bind()方法**
+
+1. `不会调用函数`，但是能改变this指向
+2. 返回由指定的this值和初始化参数改造的原函数拷贝
+3. 如果有的函数我们不需要立即调用，但是又想要改变函数内部指向
+
+```javascript
+// 使用方法
+fun.bind(thisArg, arg1, arg2);
+
+var o = {
+    name: 'Andy'
+}
+
+function fn(){
+    console.log(this);
+}
+
+// fn.bind()不会执行函数fn，相当于返回一个指向o的新函数
+var f = fn.bind(o);
+
+f();
+```
+
+
+
+**button设置定时器**
+
+```javascript
+var btn = document.querySelector('button');
+btn.onclick = function(){
+    this.disabled = true;
+
+    // 此处的this就是指调用者
+    console.log(this);
+
+    setTimeout(function(){
+        this.disabled = false;
+
+        // 此处是定时器，指向window
+        console.log(this);
+
+    }, 300)
+}
+```
+
+方法一：设置that
+
+```javascript
+var that;
+var btn = document.querySelector('button');
+btn.onclick = function(){
+
+    this.disabled = true;
+
+    that = this;
+    console.log(that);
+
+    setTimeout(function(){
+
+        that.disabled = false;
+        console.log(that);
+
+    }, 300)
+}
+```
+
+方法二：bind()绑定
+
+```javascript
+var btn = document.querySelector('button');
+btn.onclick = function(){
+
+this.disabled = true;
+
+// 定时器的function没有立刻调用，所以可以bind一下btn
+// 注意：bind(this)可以写成bind(btn)
+setTimeout(function(){
+
+    this.disabled = false;
+
+    }.bind(this), 300)
+}
+```
+
+
+
+**call apply bind 总结**
+
+相同点
+
+- ​	都可以改变this指向
+
+不同点
+
+1. call 和 apply 会调用函数，bind 不会调用函数
+2. call 和 apply 传递的参数不一样，apply 传递数组
+
+应用场景
+
+1. call 用作继承
+2. apply 和数组相关，如借助Math实现数组最大最小值
+3. bind 不调用函数，但是还想改变this指向，如定时器
+
+
+
+### 6. 严格模式
+
+#### 基本概念
+
+**概念**
+
+JS 除了提供正常模式外，还提供了严格模式（strict mode）。ES5 的严格模式采用具有限制性 JavaScript 变体的一种方式，即在严格模式下运行 JS 代码
+
+严格模式在 IE10 以上的浏览器才会支持，旧版本会忽略
+
+
+
+**严格模式不同之处**
+
+1. 消除了 JS 语法的一些不合理之处、不严谨之处，减少了怪异的行为
+2. 消除代码运行的一些不安全之处，保证代码的安全
+3. 提高编译器效率，增加运行速度
+4. 禁用了 ECMAScript 的未来版本中可能会定义的一些语法，为未来新版本的 JavaScript 做好铺垫。比如一些保留字如：class，enum，export，extends，import，super 不能做变量名
+
+
+
+#### 开启严格模式
+
+严格模式可以应用到`整个脚本`和`个别函数`中，因此严格模式可以分为`为脚本开启严格模式`和`为函数开启严格模式`
+
+
+
+**为脚本开启严格模式**
+
+为整个脚本文件开启严格模式，需要在所有语句之前放一个特定语句 "use strict"  ;（或 'use strict' ;）
+
+```javascript
+// 开启严格模式
+'use strict'
+
+// 为了防止变量污染，通过立即执行函数开启独立作用域，也相当于给script开启严格模式
+(function(){
+	'use strict'
+})()
+```
+
+
+
+**为函数开启严格模式**
+
+```javascript
+// 为某个函数开启严格模式
+function(){
+    'use strict';
+    // 下面的代码按照严格模式执行
+}
+```
+
+
+
+#### 严格模式中的变化
+
+**变量规定**
+
+- 正常模式
+  - 一个变量没有赋值，默认全局变量
+  - 声明变量
+- 严格模式
+  - 变量都必须先用var声明，然后使用
+  - 声明变量，如：delete x; 是错误的
+
+```javascript
+'use strict'
+var num = 10;
+console.log(num);
+
+delete num;
+```
+
+
+
+**this指向**
+
+- 正常模式
+  - 以前全局作用域函数的this指向window对象
+  - 以前构造函数时不加new也可以调用，当普通函数，this指向全局
+- 严格模式
+  - 现在全局作用于函数的this指向`undefined`
+  - 如果构造函数不加new调用，this会报错
+
+```javascript
+'use strict'
+
+// 现在指向undefined
+function fn(){
+	console.log(this);
+}
+fn();
+
+// 以前如果因为this指向window，所以就会不new就会存在window.sex
+// 现在不加new会报错，因为是undefined
+// 加了new就指向创建的实例
+function Star(){
+	this.sex = 'male';
+}
+Star();
+```
+
+注意事项：
+
+1. 严格模式下的定时器中的this指向的还是window
+2. 严格模式下的事件，对象还是指向调用者
+
+
+
+**函数变化**
+
+- 正常模式
+  - 可以有重名的参数
+  - 可以在非函数代码块中声明函数
+- 严格模式
+  - 不能有重名的参数
+  - 函数必须声明在顶层，新版本的JavaScript会引入“块级作用域”（ES6已引入）。不允许在非函数的代码块内声明函数
+
+```javascript
+'use strict'
+
+// 普通模式下两个参数可以同名
+// 严格模式下两个参数不能同名
+function fn(a, a){
+    console.log(a + a);
+}
+
+fn(1,2);
+
+// 函数必须声明在顶层，新版本的JavaScript会引入“块级作用域”（ES6已引入）不允许在非函数的代码块内声明函数
+// 语法错误
+if(true){
+    function fn(){ };
+    fn();
+}
+
+// 语法错误
+for(var i = 0; i < 5; i++){
+    function fn2(){ }
+    fn2();
+}
+
+// 合法
+function fn3(){
+    function fn4(){ }
+}
 ```
 

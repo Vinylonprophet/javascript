@@ -1,0 +1,63 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-22 11:13:15
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-22 11:33:57
+ * @FilePath: \javascript\ES6\函数进阶\函数的调用方式.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数的调用方式</title>
+</head>
+<body>
+    <script>
+        // 1.普通函数 指向window
+        // function fn(){
+        //     console.log('调用普通函数' + this);
+        // }
+        // window.fn();
+        // fn.call();
+
+        // 2.对象的方法
+        // var o = {
+        //     sayHi: function(){
+        //         console.log('调用对象的方法'+ this);
+        //     }
+        // }
+        // o.sayHi();
+
+        // 3.构造函数
+        // function Star(){
+
+        // }
+
+        // Star.prototype.sing = function(){
+        //     console.log('sing' + this);
+        // }
+
+        // 通过new创建实例对象
+        // var ldh = new Star();
+        // ldh.sing();
+
+        // 4.绑定事件函数
+        // btn.onclick = function(){
+
+        // }
+
+        // 5.定时器函数
+        // window.setInterval(function(){
+        //     console.log('调用定时器函数' + this);
+        // }, 1000);
+
+        // 6.立即执行函数，是自动调用的
+        (function(){
+            console.log('立即执行函数' + this);
+        })()
+    </script>
+</body>
+</html>

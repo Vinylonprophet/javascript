@@ -1,0 +1,50 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-22 14:29:05
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-22 14:51:30
+ * @FilePath: \javascript\ES6\函数进阶\改变this指向bind().html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>改变this指向bind()</title>
+</head>
+<body>
+    <button>按钮</button>
+    <script>
+         var o = {
+            name: 'Andy'
+        }
+
+        function fn(a, b){
+            console.log(this);
+            console.log(a + b);
+        }
+
+        var f = fn.bind(o, 2, 5);
+        f(3, 7);
+
+        var that;
+        var btn = document.querySelector('button');
+        btn.onclick = function(){
+
+            this.disabled = true;
+
+            // that = this;
+            console.log(this);
+
+            setTimeout(function(){
+
+                this.disabled = false;
+                console.log(this);
+
+            }.bind(this), 300)
+        }
+    </script>
+</body>
+</html>
