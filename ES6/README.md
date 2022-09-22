@@ -714,6 +714,18 @@ Object.defineProperty(obj, prop, descriptor)
 
 
 
+**obj**
+
+```javascript
+var obj = {
+    id: 1,
+    pname: '小米',
+    price: 1999
+}
+```
+
+
+
 **value**
 
 ```javascript
@@ -746,7 +758,7 @@ Object.defineProperty(obj, 'price', {
     enumerable: false
 })
 
-// 此处无法遍历
+// 此处无法遍历，因为enumerable是false
 console.log(Object.keys(obj));
 ```
 
@@ -763,7 +775,10 @@ Object.defineProperty(obj, 'address', {
     configurable: false
 })
 
-// 就会报错
+// 删除pname就不会报错
+delete obj.pname;
+
+// 删除address就会报错
 delete obj.address;
 ```
 
