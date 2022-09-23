@@ -1,0 +1,41 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-23 14:53:53
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-23 15:15:13
+ * @FilePath: \javascript\ES6\闭包\计算打车价格.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打车价格</title>
+</head>
+<body>
+    <input type="text">
+    <script>
+        var car = (function(){
+            var start = 13;
+            var total = 0;
+            return {
+                price: function(n){
+                    if(n <= 3){
+                        total = start;
+                    } else {
+                        total = start + (n - 3)*5
+                    }
+                    return total;
+                },
+                yd: function(flag){
+                    return flag ? total + 10 : total;
+                }
+            }
+        })()
+        console.log(car.price(5));
+        console.log(car.yd(true));
+    </script>
+</body>
+</html>

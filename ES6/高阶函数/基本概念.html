@@ -1,0 +1,55 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-23 11:27:22
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-23 11:50:24
+ * @FilePath: \javascript\ES6\高阶函数\基本概念.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本概念</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <style>
+        div {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        // 接受的一个函数作为参数
+        // function fn(callback){
+        //     callback&&callback();
+        // }
+        // fn(function(){alert('hi')})
+
+        // 将函数作为返回值输出
+        // function fn(){
+        //     return function(){}
+        // }
+        // fn();
+
+        function fn(a, b, callback){
+            console.log(a + b);
+            callback && callback();
+        }
+        
+        fn(1, 2, function(){
+            console.log('我是最后调用的');
+        })
+
+        $('div').animate({left: 500}, function(){
+            $('div').css("backgroundColor","purple");
+        })
+    </script>
+</body>
+</html>

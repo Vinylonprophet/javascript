@@ -1277,3 +1277,221 @@ function fn3(){
 }
 ```
 
+
+
+### 7. 高阶函数
+
+#### 基本概念
+
+`高阶函数`是对其他函数进行操作的函数，它`接收函数作为参数`或`将函数作为返回值输出`
+
+```javascript
+// 接受的一个函数作为参数
+function fn(callback){
+	callback&&callback();
+}
+fn(function(){alert('hi')})
+
+// 将函数作为返回值输出
+function fn(){
+	return function(){}
+}
+fn();
+```
+
+注意事项：
+
+1. 此时的fn就是一个高阶函数
+2. 函数也是一种数据类型，同样可以作为参数，传递给另一个参数使用。比如回调函数
+
+```javascript
+// 回调函数 div移动变色
+$('div').animate({left: 500}, function(){
+	$('div').css("backgroundColor","purple");
+})
+```
+
+
+
+#### 闭包
+
+**变量作用域**
+
+变量根据作用域的不同分为两种：`全局变量`和`局部变量`
+
+1. 函数内部可以使用全局变量
+2. 函数外部不可以使用局部变量
+3. 当函数执行完毕，本作用域的局部变量会销毁
+
+
+
+**基本概念**
+
+`闭包（Closure）`指有权访问另一个函数作用域中`变量`的函数
+
+也就是一个作用域可以访问另一个函数内部的局部变量
+
+```javascript
+// 闭包：fun这个函数作用域访问了fn的局部变量num
+function fn(){
+	var num = 10;
+	
+	function fun(){
+    	console.log(num);
+    }
+    
+    fun();
+}
+
+fn();
+```
+
+
+
+**闭包的主要作用**
+
+作用：延升了变量的访问范围
+
+```javascript
+// fn外部的作用域访问fn内部的作用域
+// 本来num会被销毁，但是return函数就延升了作用范围
+function fn(){
+	var num = 10;
+	
+    function fun(){
+    	console.log(num);
+	}
+	
+    // 返回fun这个函数
+    // 也可以写成
+    // return function(){
+    //     console.log(num);
+    // }
+    return fun;
+}
+
+var f = fn();
+
+f();
+```
+
+
+
+**案例1**
+
+获得li的索引
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例</title>
+</head>
+<body>
+    <ul class="nav">
+        <li>榴莲</li>
+        <li>臭豆腐</li>
+        <li>炸汤圆</li>
+        <li>蚂蚁上树</li>
+    </ul>
+    <script>
+		// 存在问题，i=4时跳出循环，但是无论是点击还是定时器，i都是4，所以会存在问题        
+        // 动态添加属性
+        var lis = document.querySelector('.nav').querySelectorAll('li');
+        for(var i = 0; i < lis.length; i++){
+            lis[i].index = i;
+            lis[i].onclick = function(){
+				console.log(this);
+                console.log(this.index);
+            }
+        }
+        
+        // 利用闭包的方式
+        // 会存在内存泄漏问题
+        for(var i = 0; i < lis.length; i++){
+            // 利用for循环产生了四个立即执行函数
+            // 立即执行函数成为小闭包，因为立即执行函数里任何一个函数都可以使用它的i变量
+            (function(i){
+                lis[i].onclick = function(){
+                    console.log(i);
+                }
+            })(i)
+        }
+    </script>
+</body>
+</html>
+```
+
+
+
+**案例2**
+
+循环中的setTimeout
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例</title>
+</head>
+<body>
+    <ul class="nav">
+        <li>榴莲</li>
+        <li>臭豆腐</li>
+        <li>炸汤圆</li>
+        <li>蚂蚁上树</li>
+    </ul>
+    <script>
+        // 存在问题，i=4时跳出循环，但是无论是点击还是定时器，i都是4，所以会存在问题
+        var lis = document.querySelector('.nav').querySelectorAll('li');
+        for(var i = 0; i < lis.length; i++){
+            (function(i){
+                setTimeout(function(){
+                    console.log(lis[i].innerHTML);
+                },300)
+            })(i)
+        }
+    </script>
+</body>
+</html>
+```
+
+
+
+**案例3**
+
+计算打车价格
+
+题目：
+
+- 打车起步价13元（3公里内），之后每多一公里增加5块钱，用户输入公里数就可以计算打车价格
+- 如果有拥堵情况，总价格多收取10块钱拥堵费
+
+```javascript
+var car = (function(){
+    var start = 13;
+    var total = 0;
+    return {
+    	price: function(n){
+        if(n <= 3){
+            total = start;
+        } else {
+            total = start + (n - 3)*5
+        }
+    		return total;
+		},
+    	yd: function(flag){
+    		return flag ? total + 10 : total;
+    	}
+    }
+})()
+console.log(car.price(5));
+console.log(car.yd(true));
+```
+

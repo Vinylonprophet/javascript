@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例</title>
+</head>
+<body>
+    <ul class="nav">
+        <li>榴莲</li>
+        <li>臭豆腐</li>
+        <li>炸汤圆</li>
+        <li>蚂蚁上树</li>
+    </ul>
+    <script>
+        // 动态添加属性
+        var lis = document.querySelector('.nav').querySelectorAll('li');
+        // for(var i = 0; i < lis.length; i++){
+        //     lis[i].index = i;
+        //     lis[i].onclick = function(){
+        //         console.log(this);
+        //         console.log(this.index);
+        //     }
+        // }
+        
+        // 利用闭包的方式
+        // for(var i = 0; i < lis.length; i++){
+            // 利用for循环产生了四个立即执行函数
+            // 立即执行函数成为小闭包，因为立即执行函数里任何一个函数都可以使用它的i变量
+            // (function(i){
+                // lis[i].onclick = function(){
+                    // console.log(i);
+                // }
+            // })(i)
+        // }
+
+        for(var i = 0; i < lis.length; i++){
+            (function(i){
+                setTimeout(function(){
+                    console.log(lis[i].innerHTML);
+                },300)
+            })(i)
+        }
+    </script>
+</body>
+</html>
