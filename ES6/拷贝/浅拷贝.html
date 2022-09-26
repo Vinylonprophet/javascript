@@ -1,0 +1,47 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-26 15:13:01
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-26 15:34:45
+ * @FilePath: \javascript\ES6\拷贝\浅拷贝.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浅拷贝</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            id: 1,
+            name: 'Andy',
+            msg: {
+                age: 18
+            }
+        }
+        var o = {};
+        // for(var k in obj) {
+        //     // k是属性名，obj[k]是属性值
+        //     // console.log(k + ':' + obj[k]);
+            
+        //     o[k] = obj[k];
+        // }
+
+        // o.id = 2;
+        // console.log(o);
+
+        // 浅拷贝能得到深层次的对象msg，但是拷贝的是地址
+        // o.msg.age = 19;
+        // console.log(obj);
+
+        console.log("-------------------------------");
+
+        Object.assign(o, obj);
+        console.log(o);
+    </script>
+</body>
+</html>

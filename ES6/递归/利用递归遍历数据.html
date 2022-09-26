@@ -1,0 +1,50 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-26 14:54:23
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-26 15:06:56
+ * @FilePath: \javascript\ES6\递归\利用递归遍历数据.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>利用递归遍历数据</title>
+</head>
+<body>
+    <script>
+        var data = [{
+            id: 1,
+            name: '家电',
+            goods:[{
+                id: 11,
+                gname: '冰箱'
+            }, {
+                id: 12,
+                gname: '洗衣机'
+            }]
+        },{
+            id: 2,
+            name: '服饰'
+        }]
+
+        function getID(json, id){
+            var o = {};
+            json.forEach(item => {
+                if(item.id === id){
+                    o = item;
+                }else if(item.goods && item.goods.length > 0){
+                    o = getID(item.goods, id);
+                }
+            });
+            return o;
+        }
+
+        // 函数递归拿id为12的洗衣机
+        console.log(getID(data, 12));
+    </script>
+</body>
+</html>

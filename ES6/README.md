@@ -1495,3 +1495,277 @@ console.log(car.price(5));
 console.log(car.yd(true));
 ```
 
+
+
+**思考题1**
+
+题目：下列代码输出的是什么？
+
+```javascript
+var name = "The Window";
+var obj = {
+    name: 'The Object',
+    getNameFunc: function(){
+        return function(){
+            return this.name;
+        }
+    }
+}
+
+console.log(obj.getNameFunc()());
+
+// 解析
+var f = obj.getNameFunc();
+var f = function(){
+    return this.name;
+};
+
+// 相当于匿名函数，指向window
+f();
+```
+
+
+
+**思考题2**
+
+题目：下列代码输出的是什么？
+
+```javascript
+var name = "The Window";
+var obj = {
+    name: 'The Object',
+    getNameFunc: function(){
+        var that = this;
+        return function(){
+            return that.name;
+        }
+    }
+}
+
+console.log(obj.getNameFunc()());
+
+// 解析
+// var f = obj.getNameFunc();
+// var f = function(){
+//     此处的that是局部变量，所以也有闭包的产生
+//     return that.name;
+// };
+```
+
+
+
+#### 递归
+
+**基本概念**
+
+- 一个`函数在内部可以调用其本身`，这个函数就是`递归函数`
+- 递归很容易发生`栈溢出`错误，所以必须添加退出条件`return`
+
+```javascript
+// 死递归，栈溢出
+function fn(){
+    fn();
+}
+fn();
+```
+
+
+
+**案例1**
+
+题目：求阶乘
+
+```javascript
+function fn(n){
+    if(n === 1){
+        return 1;
+    }
+    return n * fn(n-1)
+}
+
+fn();
+```
+
+
+
+**案例2**
+
+题目：求斐波那契数列
+
+```javascript
+function fb(n){
+    if(n === 2 || n ===1){
+        return 1;
+    }
+    return fb(n-1)+fb(n-2);
+}
+
+fb();
+```
+
+
+
+**案例3**
+
+题目：利用递归遍历数据
+
+```javascript
+var data = [{
+    id: 1,
+    name: '家电',
+    goods:[{
+        id: 11,
+        gname: '冰箱'
+    }, {
+        id: 12,
+        gname: '洗衣机'
+    }]
+},{
+    id: 2,
+    name: '服饰'
+}]
+
+function getID(json, id){
+    json.forEach(item => {
+        if(item.id === id){
+            console.log(item);
+        }else if(item.goods && item.goods.length > 0){
+            getID(item.goods, id);
+        }
+    });
+}
+
+// 函数递归拿id为12的洗衣机
+getID(data, 12);
+
+
+// 取值版本
+function getID(json, id){
+    var o = {};
+    json.forEach(item => {
+        if(item.id === id){
+            o = item;
+        }else if(item.goods && item.goods.length > 0){
+            o = getID(item.goods, id);
+        }
+    });
+    return o;
+}
+```
+
+
+
+**浅拷贝 && 深拷贝**
+
+- 浅拷贝只是拷贝一层，更深层次对相级别的只拷贝引用
+- 深拷贝拷贝多层，每一级别的数据都会拷贝
+
+
+
+**浅拷贝**
+
+更深层次的拷贝只拷贝地址
+
+
+
+**方法一**
+
+for in
+
+```javascript
+var obj = {
+    id: 1,
+    name: 'Andy',
+    msg: {
+        age: 18
+    }
+}
+var o = {};
+for(var k in obj) {
+    // k是属性名，obj[k]是属性值
+    // console.log(k + ':' + obj[k]);
+
+    o[k] = obj[k];
+}
+
+o.id = 2;
+console.log(o);
+
+// 浅拷贝能得到深层次的对象msg，但是拷贝的是地址
+o.msg.age = 19;
+console.log(obj);
+```
+
+
+
+**方法二**
+
+语法糖：`Object.assign`
+
+```javascript
+var obj = {
+    id: 1,
+    name: 'Andy',
+    msg: {
+        age: 18
+    }
+}
+var o = {};
+Object.assign(o, obj);
+console.log(o);
+```
+
+
+
+**深拷贝**
+
+深拷贝拷贝多层，每一级别的数据都会拷贝
+
+
+
+**方法一**
+
+函数递归
+
+```javascript
+var obj = {
+    id: 1,
+    name: 'Andy',
+    msg: {
+        age: 18
+    },
+    color: [
+        'blue',
+        'red'
+    ]
+}
+var o = {};
+
+function deepCopy(newobj, oldobj){
+    for(var k in oldobj){
+        var item = oldobj[k];
+
+        if(item instanceof Array){
+            newobj[k] = [];
+            deepCopy(newobj[k], item)
+        } else if (item instanceof Object){
+            newobj[k] = {};
+            deepCopy(newobj[k], item)
+        } else {
+            newobj[k] = item;
+        }
+    }
+}
+
+deepCopy(o, obj);
+console.log(o);
+```
+
+
+
+**方法二**
+
+```
+
+```
+

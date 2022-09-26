@@ -1,0 +1,62 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-26 10:56:14
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-26 11:08:07
+ * @FilePath: \javascript\ES6\闭包\思考题.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>思考题</title>
+</head>
+<body>
+    <script>
+        // var name = "The Window";
+        // var obj = {
+        //     name: 'The Object',
+        //     getNameFunc: function(){
+        //         return function(){
+        //             return this.name;
+        //         }
+        //     }
+        // }
+
+        // console.log(obj.getNameFunc()());
+
+        // // 解析
+        // var f = obj.getNameFunc();
+        // var f = function(){
+        //     return this.name;
+        // };
+
+        // // 相当于匿名函数，指向window
+        // f();
+
+        var name = "The Window";
+        var obj = {
+            name: 'The Object',
+            getNameFunc: function(){
+                var that = this;
+                return function(){
+                    return that.name;
+                }
+            }
+        }
+
+        console.log(obj.getNameFunc()());
+
+        // 解析
+        // var f = obj.getNameFunc();
+        // var f = function(){
+        //     此处的that是局部变量，所以也有闭包的产生
+        //     return that.name;
+        // };
+
+    </script>
+</body>
+</html>
