@@ -1723,7 +1723,7 @@ console.log(o);
 
 
 
-**方法一**
+**案例**
 
 函数递归
 
@@ -1763,9 +1763,150 @@ console.log(o);
 
 
 
-**方法二**
+### 8. 正则表达式
 
+#### 基本概念
+
+`正则表达式（Regular Expression）`是用于匹配字符串中字符组合的模式，在JavaScript中，正则表达式也是对象
+
+
+
+**用途：**
+
+- 验证表单（`匹配`）
+- 过滤词汇（`替换`）
+- 特定部分（`提取`）
+
+
+
+**特点**
+
+1. 灵活性，逻辑性和功能性强
+2. 可以迅速的用简单的方式达到字符串的复杂控制
+
+
+
+#### 正则表达式的使用
+
+**创建表达式**
+
+1. 利用 RegExp对象来创建正则表达式
+2. 通过字面量创建
+
+```javascript
+// 利用 RegExp对象来创建 正则表达式
+// var regexp = new RegExp(/表达式/)
+
+var regexp = new RegExp(/123/);
+console.log(regexp);
+
+// 通过字面量创建
+// var 变量名 = /表达式/
+
+var rg = /123/;
+console.log(rg);
 ```
 
+
+
+**测试表达式**
+
+test()正则对象方法，用于检测字符串是否符合该规则，会返回 true 或 false ，参数是测试字符串
+
+```javascript
+// regexObj.test(str)
+
+var regexp = /123/;
+console.log(regexp.test(1354));
 ```
+
+注意事项：
+
+1. regexObj是写的正则表达式
+2. str是我们测试的文本
+
+
+
+#### 特殊字符
+
+**边界符**
+
+边界符用来`提示字符所处的位置`
+
+| ^    | 表示匹配行首的文本（开始） |
+| ---- | -------------------------- |
+| $    | 表示匹配行尾的文本（结束） |
+
+```javascript
+var rgex = /abc/;
+console.log(rgex.test('abcde'));
+
+console.log('=============================');
+
+var reg = /^abc/;
+// 没有以abc开头，所以是false
+console.log(reg.test('aabc'));
+
+console.log('----------------------------');
+
+// 精确匹配
+var rg = /^abc$/;
+console.log(rg.test('abc'));
+
+// 必须abc开头abc结尾，false
+console.log(rg.test('abcdabc'));
+```
+
+
+
+**字符类**
+
+1. 字符类：[] 表示有一系列字符可供选择，只要匹配其中一个就可以了
+2. 字符表示有一系列字符可供选择，只要匹配其中一个，`所有可供选择的字符都放在方括号内，`**[ - ]**
+3. 字符组合
+4. [ ^ ] 内部取反 ^
+
+```javascript
+// 只要包含a，b，c 都为true
+var regex = /[abc]/;
+console.log(regex.test('wfsdavc'));
+
+// 三选一，开头结尾是下列中的同一个，不是光相同就行
+var re = /^[abc]$/
+
+// true
+console.log(re.test('a'));
+console.log(re.test('b'));
+console.log(re.test('c'));
+
+// false
+console.log(re.test('aa'))
+
+// false
+console.log(re.test('abc'))
+
+console.log('==========字符范围==========');
+// 小写的a-z
+var rex = /^[a-z]$/
+// true
+console.log(rex.test('c'));
+
+console.log('==========字符组合==========');
+var rgex = /[a-zA-Z0-9]/
+console.log(rgex.test('asdwqd4645sd'));
+
+console.log('==========^取反==========');
+// 内部取反
+var rgx = /^[^a-zA-Z0-9]$/
+
+// false
+console.log(rgx.test('1'));
+
+// true
+console.log(rgx.test('*'));
+```
+
+
+
+**量词符**
 

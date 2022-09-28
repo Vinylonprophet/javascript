@@ -1,0 +1,58 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-28 15:20:19
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-28 15:45:38
+ * @FilePath: \javascript\ES6\正则表达式\字符类.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符类</title>
+</head>
+<body>
+    <script>
+        // 只要包含a，b，c 都为true
+        var regex = /[abc]/;
+        console.log(regex.test('wfsdavc'));
+
+        // 三选一，开头结尾是下列中的同一个，不是光相同就行
+        var re = /^[abc]$/
+
+        // true
+        console.log(re.test('a'));
+        console.log(re.test('b'));
+        console.log(re.test('c'));
+
+        // false
+        console.log(re.test('aa'))
+
+        // false
+        console.log(re.test('abc'))
+
+        console.log('==========字符范围==========');
+        // 小写的a-z
+        var rex = /^[a-z]$/
+        // true
+        console.log(rex.test('c'));
+
+        console.log('==========字符组合==========');
+        var rgex = /[a-zA-Z0-9]/
+        console.log(rgex.test('asdwqd4645sd'));
+
+        console.log('==========^取反==========');
+        // 内部取反
+        var rgx = /^[^a-zA-Z0-9]$/
+
+        // false
+        console.log(rgx.test('1'));
+
+        // true
+        console.log(rgx.test('*'));
+    </script>
+</body>
+</html>
