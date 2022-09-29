@@ -2088,6 +2088,14 @@ switch按照什么样的模式来匹配：
 - gi ：全局匹配 + 忽略大小写
 
 ```html
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-29 17:08:40
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-29 17:23:40
+ * @FilePath: \javascript\ES6\正则表达式\正则表达式的替换.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
