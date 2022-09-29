@@ -1,0 +1,29 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-29 11:19:57
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-29 13:53:17
+ * @FilePath: \javascript\ES6\正则表达式\量词重复某个模式的次数.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量词重复某个模式的次数</title>
+</head>
+<body>
+    <script>
+        var reg = /^[a-zA-Z0-9_-]{3,16}$/;
+
+        console.log(reg.test(''));
+        console.log(reg.test('andy-red'));
+        console.log(reg.test('andy_red'));
+        console.log(reg.test('andy007'));
+        console.log(reg.test('andy!007'));
+        
+    </script>
+</body>
+</html>

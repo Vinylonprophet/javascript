@@ -1833,9 +1833,10 @@ console.log(regexp.test(1354));
 
 边界符用来`提示字符所处的位置`
 
-| ^    | 表示匹配行首的文本（开始） |
-| ---- | -------------------------- |
-| $    | 表示匹配行尾的文本（结束） |
+| 边界符 | 说明                       |
+| ------ | -------------------------- |
+| ^      | 表示匹配行首的文本（开始） |
+| $      | 表示匹配行尾的文本（结束） |
 
 ```javascript
 var rgex = /abc/;
@@ -1909,4 +1910,211 @@ console.log(rgx.test('*'));
 
 
 **量词符**
+
+量词符用来`设定某个模式出现的次数`
+
+| 量词符 | 说明             |
+| ------ | ---------------- |
+| *      | 重复零次或更多次 |
+| +      | 重复一次或更多次 |
+| ?      | 重复零次或一次   |
+| {n}    | 重复n次          |
+| {n,}   | 重复n次或更多次  |
+| {n,m}  | 重复n到m次       |
+
+```javascript
+// 模板
+var reg = /^a$/;
+
+// * 相当于 >= 0
+var reg = /^a*$/;
+console.log(reg.test(''));          // true
+console.log(reg.test('a'));         // true
+console.log(reg.test('aaa'));       // true
+
+// + 相当于 >= 1
+var reg = /^a+$/;
+console.log(reg.test(''));          // false
+console.log(reg.test('a'));         // true
+console.log(reg.test('aaa'));       // true
+
+// ? 相当于 1 || 0
+var reg = /^a?$/;
+console.log(reg.test(''));          // true
+console.log(reg.test('a'));         // true
+console.log(reg.test('aaa'));       // false
+
+// {3 } 相当于 重复3次
+var reg = /^a{3}$/;
+console.log(reg.test(''));          // false
+console.log(reg.test('a'));         // false
+console.log(reg.test('aaa'));       // true
+
+// {3, } 相当于 >= 3次
+var reg = /^a{3,}$/;
+console.log(reg.test(''));          // false
+console.log(reg.test('a'));         // false
+console.log(reg.test('aaa'));       // true
+console.log(reg.test('aaaa'));      // true
+
+// {3, 5} 相当于 >= 3 && <=5
+var reg = /^a{3,5}$/;
+console.log(reg.test(''));          // false
+console.log(reg.test('a'));         // false
+console.log(reg.test('aaa'));       // true
+console.log(reg.test('aaaa'));      // true
+console.log(reg.test('aaaaa'));     // true
+console.log(reg.test('aaaaaa'));    // false
+```
+
+
+
+**量词重复某个模式的次数**
+
+```javascript
+var reg = /^[a-zA-Z0-9_-]{3,16}$/;
+
+console.log(reg.test(''));
+console.log(reg.test('andy-red'));
+console.log(reg.test('andy_red'));
+console.log(reg.test('andy007'));
+console.log(reg.test('andy!007'));
+```
+
+
+
+**用户名表单验证**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户名表单验证</title>
+    <style>
+        span {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .right {
+            color: green;
+        }
+
+        .wrong {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" class="uname"> <span>请输入用户名</span>
+    <script>
+        var reg = /^[a-zA-Z0-9_-]{3,16}$/;
+        var uname = document.querySelector('.uname');
+        var span = document.querySelector('span');
+        uname.onblur = function(){
+            if(reg.test(this.value)){
+                span.className = 'right';
+                span.innerHTML = '用户名格式输入正确';
+            } else {
+                span.className = 'wrong';
+                span.innerHTML = '用户名格式输入错误';
+            }
+        }
+    </script>
+</body>
+</html>
+```
+
+
+
+**预定义类**
+
+预定义类指的是`某些常见模式的简写方式`
+
+| 预定类 | 说明                                                         |
+| ------ | ------------------------------------------------------------ |
+| \d     | 匹配0-9之间的任一数字，相当于[0-9]                           |
+| \D     | 匹配所有0-9一味的字符，相当于[ ^ 0-9]                        |
+| \w     | 匹配任意的字母、数字和下划线，县东港与[A-Za-z0-9_]           |
+| \W     | 除所有字母、数字和下划线以外的字符，相当于[ ^ A-Za-z0-9_]    |
+| \s     | 匹配空格（包括换行符、制表符、空格符等），相当于[\t\r\n\v\f] |
+| \S     | 匹配非空格的字符，相当于[ ^ \t\r\n\v\f]                      |
+
+
+
+**座机号码验证**
+
+```javascript
+// 座机号码验证：全国座机号码   两种格式：  010-12345678    或者    0530-1234567
+// 此处的判断是指很多里面有一部分满足就是true，所以后半部分就算是9个数字也是true
+var reg = /^\d{3}-\d{8}|\d{4}-\d{7}$/
+
+console.log(reg.test('534-12345678'));
+```
+
+
+
+**正则表达式的替换**
+
+**replace替换**
+
+replace()方法可以实现替换字符串操作，用来替换的参数可以是一个字符串或是一个正则表达式
+
+```javascript
+stringObject.replace(regexp/substr,replacement)
+```
+
+1. 第一个参数：被替换的字符串 或者 正则表达式
+2. 第二个参数：替换为字符串
+3. 返回值是一个替换完毕的新字符串
+
+注意事项：replace只替换一次
+
+
+
+**正则表达式参数**
+
+```javascript
+/表达式/[switch]
+```
+
+switch按照什么样的模式来匹配：
+
+- g ： 全局匹配
+- i ：忽略大小写
+- gi ：全局匹配 + 忽略大小写
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则表达式的替换</title>
+</head>
+<body>
+    <textarea name="" id="message"></textarea>
+    <button>提交</button>
+    <div></div>
+    <script>
+        var str = 'andy和red';
+        // var newStr = str.replace('andy','baby');
+        // var newStr = str.replace(/andy/,'baby');
+        // console.log(newStr);
+        
+        var text = document.querySelector('textarea');
+        var btn = document.querySelector('button');
+        var div = document.querySelector('div');
+        
+        btn.onclick = function(){
+            div.innerHTML = text.value.replace(/激情/g,'')
+        }
+    </script>
+</body>
+</html>
+```
 

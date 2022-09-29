@@ -1,0 +1,63 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-29 11:03:11
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-29 11:13:04
+ * @FilePath: \javascript\ES6\正则表达式\量词符.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量词符</title>
+</head>
+<body>
+    <script>
+        // 模板
+        var reg = /^a$/;
+
+        // * 相当于 >= 0
+        var reg = /^a*$/;
+        console.log(reg.test(''));          // true
+        console.log(reg.test('a'));         // true
+        console.log(reg.test('aaa'));       // true
+
+        // + 相当于 >= 1
+        var reg = /^a+$/;
+        console.log(reg.test(''));          // false
+        console.log(reg.test('a'));         // true
+        console.log(reg.test('aaa'));       // true
+
+        // ? 相当于 1 || 0
+        var reg = /^a?$/;
+        console.log(reg.test(''));          // true
+        console.log(reg.test('a'));         // true
+        console.log(reg.test('aaa'));       // false
+
+        // {3 } 相当于 重复3次
+        var reg = /^a{3}$/;
+        console.log(reg.test(''));          // false
+        console.log(reg.test('a'));         // false
+        console.log(reg.test('aaa'));       // true
+
+        // {3, } 相当于 >= 3次
+        var reg = /^a{3,}$/;
+        console.log(reg.test(''));          // false
+        console.log(reg.test('a'));         // false
+        console.log(reg.test('aaa'));       // true
+        console.log(reg.test('aaaa'));      // true
+
+        // {3, 5} 相当于 >= 3 && <=5
+        var reg = /^a{3,5}$/;
+        console.log(reg.test(''));          // false
+        console.log(reg.test('a'));         // false
+        console.log(reg.test('aaa'));       // true
+        console.log(reg.test('aaaa'));      // true
+        console.log(reg.test('aaaaa'));     // true
+        console.log(reg.test('aaaaaa'));    // false
+    </script>
+</body>
+</html>
