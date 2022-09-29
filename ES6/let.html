@@ -1,0 +1,75 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-29 18:17:11
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-30 00:04:57
+ * @FilePath: \ES6\let.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>let</title>
+</head>
+<body>
+    <script>
+        // // let关键字是可以声明变量的
+        // if(true){
+        //     let a = 10;
+        // }
+        // console.log(a);     // a is not defined
+
+        // if(true){
+        //     let b = 20;
+        //     console.log(b);
+        //     if(true){
+        //         let c = 30;
+        //     }
+        //     console.log(c); // 访问不到
+        // }
+
+        // console.log('=============防止循环变量变成全局变量=============');
+
+        // // 如果是 var i = 0 ，for循环外可以访问得到
+        // // let就是和for循环进行了绑定
+        // for(let i = 0; i < 2; i++){
+
+        // }
+        // console.log(i);
+
+        // console.log('=============没有变量提升=============');
+
+        // // 大概就是先使用，再声明，属于变量提升
+        // console.log(a);
+        
+        // let a = 20;         // a is not defined
+        // // var a = 20;      // undefined 但是变量提升了
+
+        // console.log('=============暂时性死区=============');
+        
+        // var tmp = 123;
+
+        // // 由于let是块级有效，所以let的tmp和外部的tmp没有关系，但是块级的let之前使用了tmp，所以会报错，报没有声明的错误
+        // if(true) {
+        //     tmp = 'abc';
+        //     let tmp;
+        // }
+        
+        console.log('=============经典面试题1=============');
+
+        var arr = [];
+
+        for(var i = 0; i < 2; i++){
+            arr[i] = function(){
+                console.log(i);
+            }
+        }
+
+        arr[0]();
+        arr[1]();
+    </script>
+</body>
+</html>
