@@ -337,3 +337,36 @@ console.log(sum(10, 20, 30));
 
 ### 扩展运算符
 
+**Array的扩展方法—扩展运算符（展开语法）**
+
+- 扩展运算符可以将数组或者对象转为用`逗号分隔`的参数序列
+- 扩展运算符可以应用于`合并数组`
+
+```javascript
+console.log('=====分割=====');
+let ary = [1, 2, 3];
+// 是有逗号的
+...ary                      // 1, 2, 3,
+
+// log出来本身就没有逗号
+console.log(ary);
+console.log(...ary);        // 1 2 3
+console.log(1,2,3);         // 1 2 3
+
+console.log('=====合并=====');
+
+// 方法一
+let ary = [1, 2, 3];
+let arr = [4, 5, 6];
+let ay = [...ary, ...arr];
+
+console.log(ay);
+
+// 方法二
+let ary = [1, 2, 3];
+let arr = [4, 5, 6];
+
+ary.push(...arr);
+console.log(ary);
+```
+
