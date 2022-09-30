@@ -1,0 +1,49 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-30 14:36:48
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-30 14:51:46
+ * @FilePath: \ES6\解构赋值.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解构赋值</title>
+</head>
+<body>
+    <script>
+        console.log('=====数组解构=====');
+
+        // // a, b, c 要一一对应
+        // let [a, b, c] = [1, 2, 3];
+        
+        // console.log(a);
+        // console.log(b);
+        // console.log(c);
+
+        // // 数量没对应上，foo就会是undefined
+        // let [bar, foo] = [1];
+
+        // console.log(bar);
+        // console.log(foo);
+
+        console.log('=====对象解构=====');
+
+        // 方法一
+        let person = {
+            name: '张三',
+            age: 20
+        }
+        // let {name, age} = person;
+        // console.log(name);
+
+        // 方法二
+        let {name: Myname, age: Age} = person;
+        console.log(Myname);
+    </script>
+</body>
+</html>

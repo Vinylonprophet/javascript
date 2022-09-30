@@ -1,0 +1,78 @@
+<!--
+ * @Author: Vinylonprophet 915390118@qq.com
+ * @Date: 2022-09-30 14:51:55
+ * @LastEditors: Vinylonprophet 915390118@qq.com
+ * @LastEditTime: 2022-09-30 15:23:11
+ * @FilePath: \ES6\箭头函数.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>箭头函数</title>
+</head>
+<body>
+    <script>
+        // const fn = () => {
+        //     console.log(123);
+        // }
+        // fn();
+
+        // // 省略大括号
+
+        // function sum(num1, num2){
+        //     return num1 + num2;
+        // }
+        // const sum1 = (num3, num4) => num3 + num4;
+
+        // console.log(sum(2, 4));
+        // console.log(sum1(3, 6));
+
+        // // 可以省略小括号
+        // function fn(v){
+        //     return v;
+        // }
+        // const fn = v => v;
+
+        // 箭头函数不绑定this关键字
+        // const obj = {
+        //     name: '张三'
+        // }
+        // function fn(){
+        //     console.log(this);
+
+        //     // 这个指向的是上文的this
+        //     return () => {
+        //         console.log(this);
+        //     }
+            
+        //     // 这个指向的是window
+        //     return function(){
+        //         console.log(this);
+        //     }
+        // } 
+        // const resFn = fn.call(obj);
+        // resFn();
+
+        console.log('=====this指向=====');
+
+        var obj = {
+            age: 20,
+            say: () => {
+                console.log(this);
+                console.log(this.age);
+            },
+            run: function(){
+                console.log(this);
+                console.log(this.age);
+            }
+        }
+
+        // 由于箭头函数指向箭头函数定义区域的this，obj身为一个对象无法产生作用域，所以实际上被定义在全局作用域下
+        obj.say();
+    </script>
+</body>
+</html>
