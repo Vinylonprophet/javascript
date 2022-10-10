@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>from()</title>
+</head>
+<body>
+    <script>
+        // 构造函数方法：Array.from()
+        let arrLike = {
+            '0': '1',
+            '1': '2',
+            '2': '3',
+            length: 3
+        }
+
+        // 将类数组或可遍历对象转换为真正的数组
+        let arr2 = Array.from(arrLike);
+        console.log(arr2);
+
+        let newAry = Array.from(arrLike, item => item + '2');
+        console.log(newAry);
+    </script>
+</body>
+</html>

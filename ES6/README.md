@@ -370,3 +370,202 @@ ary.push(...arr);
 console.log(ary);
 ```
 
+
+
+**伪数组转换为真正的数组**
+
+```javascript
+// 获取页面中的div
+var oDivs = document.getElementsByTagName('div');
+
+// 输出伪数组
+console.log(oDivs);
+
+// 将类数组或可遍历对象转换为真正的数组
+var ary = [...oDivs];
+// 输出数组
+console.log(ary);
+```
+
+
+
+### Array的扩展方法
+
+**Array.from()**
+
+将类数组或可遍历对象转换为真正的数组
+
+```javascript
+let arrLike = {
+    '0': '1',
+    '1': '2',
+    '2': '3',
+    length: 3
+}
+
+// 将类数组或可遍历对象转换为真正的数组
+let arr2 = Array.from(arrLike);
+console.log(arr2);
+
+let newAry = Array.from(arrLike, item => item * 2);
+console.log(newAry);
+```
+
+
+
+**Array.find()**
+
+用于找出第一个符合条件的数组成员，如果没有找到返回undefined
+
+```javascript
+let ary = [{
+    id: 1,
+    name: '张三'
+},{
+    id: 2,
+    name: '李四'
+}]
+
+let target = ary.find((item, index) => item.id === 2);
+
+console.log(target);
+```
+
+
+
+**Array.findIndex()**
+
+用于找出第一个符合条件的数组成员的位置，如果没有找到返回-1
+
+```javascript
+let ary = [1, 5, 10, 15];
+
+let index = ary.findIndex((item, index) => item > 9);
+
+console.log(index);
+```
+
+
+
+**Array.includes()**
+
+表示某个数组是否包含给定的值，返回布尔值
+
+```javascript
+console.log([1, 2, 3].includes(2));
+console.log([1, 2, 3].includes(4));
+```
+
+
+
+### String 的扩展方法
+
+**模板字符串**
+
+模板字符串中可以`解析变量`
+
+```javascript
+// 模板字符串可以解析变量
+let name = 'Vinylon';
+let sayHello = `Hello, my name is ${name}`;
+console.log(sayHello);
+
+// 模板字符串可以换行
+let result = {
+    name: 'Vinylon',
+    age: 20,
+    sex: '男'
+}
+let html = `
+    <div>
+        <span>${result.name}</span>
+        <span>${result.age}</span>
+        <span>${result.sex}</span>
+    </div>
+`
+console.log(html);
+
+// 模板字符串中可以调用函数
+const Hello = function(){
+    return 'Vinylon';
+}
+let greet = `${Hello()}'s secret`;
+
+console.log(greet);
+```
+
+
+
+**startsWith() 和 endsWith()**
+
+- `startsWith()` 表示参数字符串是否在原字符串的头部，返回布尔值
+- `endsWith()` 表示参数字符串是否在原字符串的尾部，返回布尔值
+
+```javascript
+let str = 'Hello world';
+
+// startsWith
+console.log(str.startsWith('Hello'));
+
+// endsWith
+console.log(str.endsWith('world'));
+```
+
+
+
+**repeat()**
+
+repeat方法表示将原字符串重复n次，返回一个新字符串
+
+
+
+### Set 数据结构
+
+ES6 提供了新的数据结构 Set。类似于数组，但是成员的值都是唯一的，没有重复的值。
+
+- Set 本身是一个构造函数，用来生成 Set 数据结构
+- Set 函数可以接受一个数组，用来初始化
+
+```javascript
+const s = new Set();
+const set = new Set([1, 2, 3, 4, 4]);
+
+console.log(set);       // Set(4) {1, 2, 3, 4}
+console.log(...set);    // 1 2 3 4
+
+const ary = [...set];
+console.log(ary);       // 1, 2, 3, 4
+```
+
+
+
+**实例方法**
+
+- add(value) ：添加某个值，返回 Set 结构本身
+- delete(value) ：删除某个值，返回一个布尔值，表示删除是否成功
+- has(value) ：返回一个布尔值，表示该值是否为 Set 的成员
+- clear() ：清楚所有成员，没有返回值
+
+```javascript
+const s = new Set();
+
+s.add(1).add(2).add(3);
+
+s.delete(2);
+
+s.has(1);
+
+s.clear();
+```
+
+
+
+**遍历 Set**
+
+Set 结构的实例和数组一样，也拥有forEach方法，用于对每个成员执行某种操作，没有返回值
+
+```javascript
+const s = new Set([1, 2, 3, 4, 2]);
+s.forEach( value => console.log(value))
+```
+
